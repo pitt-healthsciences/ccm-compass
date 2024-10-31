@@ -354,7 +354,7 @@
   <tr><td>condition_occurrence_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
-  <tr><td>condition_concept_id</td><td>INT</td><td>Represents the name of the condition <a href="./CompassDataSpec.html" target="_blank">(see Compass Data Spec page)</a></td></tr>
+  <tr><td>condition_concept_id</td><td>INT</td><td>Represents the name of the condition <a href="./CompassDataElements.html" target="_blank">(see Compass Data Elements page)</a></td></tr>
   <tr><td>condition_status_concept_id</td><td>INT</td><td>Represents the status of the condition (need to add subtable)</td></tr>
   <tr><td>diagnosis_priority</td><td>INT</td><td>Diagnosis priority in source table</td></tr>
   <tr><td>source_code</td><td>INT</td><td>(This column is used for QA)</td></tr>
@@ -372,7 +372,7 @@
   <tr><td>procedure_occurrence_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
-  <tr><td>procedure_concept_id</td><td>INT</td><td>Represents the name of the procedure <a href="./CompassDataSpec.html" target="_blank">(see Compass Data Spec page)</a></td></tr>
+  <tr><td>procedure_concept_id</td><td>INT</td><td>Represents the name of the procedure <a href="./CompassDataElements.html" target="_blank">(see Compass Data Elements page)</a></td></tr>
   <tr><td>procedure_start_datetime</td><td>DATETIME</td><td>Timestamp of the event</td></tr>
   <tr><td>procedure_type</td><td>CHAR</td><td>Modifier of the procedure (P: primary; S: secondary)</td></tr>
   <tr><td>procedure_priority</td><td>INT</td><td>Procedure position/priority</td></tr>
@@ -392,7 +392,7 @@
   <tr><td>device_exposure_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
-  <tr><td>device_concept_id</td><td>INT</td><td>Represents the name of the device <a href="./CompassDataSpec.html" target="_blank">(see Compass Data Spec page)</a></td></tr>
+  <tr><td>device_concept_id</td><td>INT</td><td>Represents the name of the device <a href="./CompassDataElements.html" target="_blank">(see Compass Data Elements page)</a></td></tr>
   <tr><td>device_exposure_start_datetime</td><td>DATETIME</td><td>Timestamp of the event</td></tr>
   <tr><td>provider_id</td><td>INT</td><td>The person who charted the device <a href="#p">(see PROVIDER reference table)</a></td></tr>
   <tr><td>source_code</td><td>VARCHAR</td><td>(This column is used for QA)</td></tr>
@@ -410,11 +410,11 @@
   <tr><td>measurement_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
-  <tr><td>measurement_concept_id</td><td>INT</td><td>Represents the name of the measurement <a href="./CompassDataSpec.html" target="_blank">(see Compass Data Spec page)</a></td></tr>
+  <tr><td>measurement_concept_id</td><td>INT</td><td>Represents the name of the measurement <a href="./CompassDataElements.html" target="_blank">(see Compass Data Elements page)</a></td></tr>
   <tr><td>measurement_datetime</td><td>DATETIME</td><td>Timestamp of the event</td></tr>
   <tr><td>value_as_number</td><td>DECIMAL</td><td>Result parsed to be a number</td></tr>
   <tr><td>value_as_string</td><td>VARCHAR(50)</td><td>Event tag</td></tr>
-  <tr><td>value_as_concept_id</td><td>INT</td><td>Categorical result <a href="./CompassDataSpec.html" target="_blank">(see Compass Data Spec page)</td></tr>
+  <tr><td>value_as_concept_id</td><td>INT</td><td>Categorical result <a href="./CompassDataElements.html" target="_blank">(see Compass Data Elements page)</td></tr>
   <tr><td>unit_concept_id</td><td>INT</td><td>Units (need to add subtable)</td></tr>
   <tr><td>range_low</td><td>DECIMAL</td><td>Range low parsed to be a number</td></tr>
   <tr><td>range_high</td><td>DECIMAL</td><td>Range high parsed to be a number</td></tr>
@@ -435,11 +435,11 @@
   <tr><td>observation_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
-  <tr><td>observation_concept_id</td><td>INT</td><td>Represents the name of the observation <a href="./CompassDataSpec.html" target="_blank">(see Compass Data Spec page)</a></td></tr>
+  <tr><td>observation_concept_id</td><td>INT</td><td>Represents the name of the observation <a href="./CompassDataElements.html" target="_blank">(see Compass Data Elements page)</a></td></tr>
   <tr><td>observation_datetime</td><td>DATETIME</td><td>Timestamp of the event</td></tr>
   <tr><td>value_as_number</td><td>DECIMAL</td><td>Result parsed to be a number</td></tr>
   <tr><td>value_as_string</td><td>VARCHAR(60)</td><td>String value of the result</td></tr>
-  <tr><td>value_as_concept_id</td><td>INT</td><td>Categorical result <a href="./CompassDataSpec.html" target="_blank">(see Compass Data Spec page)</td></tr>
+  <tr><td>value_as_concept_id</td><td>INT</td><td>Categorical result <a href="./CompassDataElements.html" target="_blank">(see Compass Data Elements page)</td></tr>
   <tr><td>qualifier_concept_id</td><td>INT</td><td>Attributes of the observation (e.g., severity; need to add subtable)</td></tr>
   <tr><td>unit_concept_id</td><td>INT</td><td>Units (need to add subtable)</td></tr>
   <tr><td>provider_id</td><td>INT</td><td>The person who charted the observation <a href="#p">(see PROVIDER reference table)</a></td></tr>
@@ -459,7 +459,7 @@
   <tr><td>drug_exposure_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
-  <tr><td>drug_concept_id</td><td>INT</td><td>Represents the type of drug <a href="./CompassDataSpec.html" target="_blank">(see Compass Data Spec page)</a></td></tr>
+  <tr><td>drug_concept_id</td><td>INT</td><td>Represents the type of drug <a href="./CompassDataElements.html" target="_blank">(see Compass Data Elements page)</a></td></tr>
   <tr><td>drug_exposure_start_datetime</td><td>DATETIME</td><td>Timestamp of the start of the event</td></tr>
   <tr><td>drug_exposure_end_datetime</td><td>DATETIME</td><td>Timestamp of the end of the event</td></tr>
   <tr><td>drug_type_concept_id</td><td>INT</td><td>Distinguishes administrations from prescriptions (need to add subtable)</td></tr>
@@ -562,8 +562,8 @@
     </td>
   </tr>
   <tr><td>location_id</td><td>INT</td><td><a href="#l">(see LOCATION reference table)</a></td></tr>
-  <tr><td>care_site_source_value</td><td>VARCHAR(20)</td><td>Cerner name for the unit [location]</td></tr>
-  <tr><td>place_of_service_source_value</td><td>VARCHAR(10)</td><td>Three-character hospital code [hospital, hos]</td></tr>
+  <tr><td>care_site_source_value</td><td>VARCHAR(20)</td><td>Cerner name for the unit</td></tr>
+  <tr><td>place_of_service_source_value</td><td>VARCHAR(10)</td><td>Three-character hospital code</td></tr>
 </table>
 
 <!-- LOCATION Table -->
