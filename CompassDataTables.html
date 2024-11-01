@@ -462,15 +462,22 @@
   <tr><td>drug_concept_id</td><td>INT</td><td>Represents the type of drug <a href="./CompassDataElements.html">(see Compass Data Elements page)</a></td></tr>
   <tr><td>drug_exposure_start_datetime</td><td>DATETIME</td><td>Timestamp of the start of the event</td></tr>
   <tr><td>drug_exposure_end_datetime</td><td>DATETIME</td><td>Timestamp of the end of the event</td></tr>
-  <tr><td>drug_type_concept_id</td><td>INT</td><td>Distinguishes administrations from prescriptions (need to add subtable)</td></tr>
-  <tr><td>quantity</td><td>INT</td><td>Number of doses given or ordered</td></tr>
+  <tr><td>amount_value</td><td>DECIMAL</td><td>The volume of administration</td></tr>
+  <tr><td>amount_unit_concept_id</td><td>INT</td><td>Concept id for the units of the administration (need to add subtable)</td></tr>
   <tr><td>infusion_rate</td><td>DECIMAL</td><td>For IV drugs, include rate</td></tr>
   <tr><td>infusion_rate_unit_concept_id</td><td>INT</td><td>Concept id for rate unit (need to add subtable)</td></tr>
+  <tr><td>infusion_event_concept_id</td><td>INT</td><td>Concept id for infusion events (need to add subtable)</td></tr>
   <tr><td>route_concept_id</td><td>INT</td><td>Route of administration (need to add subtable)</td></tr>
   <tr><td>admin_site_concept_id</td><td>INT</td><td>Location of administration (need to add subtable)</td></tr>
+  <tr><td>dose_quantity</td><td>DECIMAL</td><td>The quantiy of administration (need to add subtable)</td></tr>
+  <tr><td>dose_quantity_unit_concept_id</td><td>INT</td><td>Concept id of the units of the quantity of administration (need to add subtable)</td></tr>
+  <tr><td>frequency_concept_id</td><td>INT</td><td>Concept of the prescribed administration frequency (need to add subtable)</td></tr>
   <tr><td>provider_id</td><td>INT</td><td>The person who documented the administration <a href="#p">(see PROVIDER reference table)</a></td></tr>
-  <tr><td>drug_source_value</td><td>VARCHAR(50)</td><td>(This column is used for QA)</td></tr>
-  <tr><td>route_source_value</td><td>VARCHAR(50)</td><td>(This column is used for QA)</td></tr>
+  <tr><td>flag_intravenous_med</td><td>BIT</td><td>1 if record is an intravenous medication, otherwise 0</td></tr>
+  <tr><td>flag_discharge_med</td><td>BIT</td><td>1 if record is a prescription medication ordered at discharge, otherwise 0</td></tr>
+  <tr><td>flag_existing_home_med</td><td>BIT</td><td>1 if record is an existing home medication, otherwise 0</td></tr>
+  <tr><td>source_code</td><td>INT</td><td>(This column is used for QA)</td></tr>
+  <tr><td>EVENT_TAG</td><td>VARCHAR(50)</td><td>(This column is used for QA)</td></tr>
 </table>
 
 <!-- PROVIDER Table -->
