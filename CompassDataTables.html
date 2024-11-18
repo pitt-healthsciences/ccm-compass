@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compass Data Tables</title>
-  <style>
+ <style>
     table {
       width: 100%;
       border-collapse: collapse;
     }
     th, td {
-      padding: 8px;
+      padding: 4px;
       text-align: left;
       border: 1px solid #ddd;
     }
@@ -55,7 +55,7 @@
 <body>
 
 <img src="./img/CCM-banner.png" alt="Floating Banner" class="banner-image" width="1000px">
-<a href="./index.html">[Home]</a> <a href="./CompassDataTables.html">[Tables]</a> <a href="./CompassDataElements.html">[Elements]</a>
+<a href="./index.html">[Home]</a> <a href="./CompassDataTables.html">[Tables]</a> <a href="./CompassDataElements.html">[Elements]</a> <a href="./CompassSyntheticSampleData.html">[Sample]</a>
 <h2 id="top">Compass Data Tables</h2>
 
 <!-- Table of Contents -->
@@ -78,16 +78,20 @@
 	<li><a href="#l">LOCATION</a></li>
 	<li><a href="#cs">CARE_SITE</a></li>
     <li><a href="#fd">FLAG_DEFINITION</a></li>
+	<li><a href="#cd">COHORT_DEFINITION</a></li>
+	<li><a href="#vsd">VALUE_SET_DEFINITION</a></li>
+	<li><a href="#vs">VALUE_SET</a></li>
   </ul>
  <h3>Derived Tables</h3>
   <ul>
     <li><a href="#did">DAILY_IMV_DETAIL</a></li>
-	<li><a href="#fdc">FLAG_DAILY_COMPASS</a></li>
-	<li><a href="#fhc">FLAG_HOSPITALIZATION_COMPASS</a></li>
-    <li><a href="#cc">COMORBIDITIES_COMPASS</a></li>
+    <li><a href="#cc">COMORBIDITIES</a></li>
+	<li><a href="#fdc">FLAG_DAILY</a></li>
+	<li><a href="#fhc">FLAG_HOSPITALIZATION</a></li>
+	<li><a href="#cohort">COHORT</a></li>
   </ul>
 </div>
-<i>Last updated 10/31/2024</i> 
+<i>Last updated 11/17/2024</i> 
 <hr>
 
 <!-- HOSPITALIZATION_COMPASS Table -->
@@ -137,6 +141,9 @@
 	  <tr><td>124</td><td>UPMC Western Behavioral Health</td></tr>
   	  </table>
     </td>
+  </tr>
+  <tr onclick="toggleSubTable('sub-table-race')" style="cursor: pointer;">
+    <td>age_at_admit</td><td>INT</td><td>Age in years (for safe harbor datasets, all ages &ge;80 will be represented with the average age of all &ge;80 hospitalizations)</td>
   </tr>
   <tr onclick="toggleSubTable('sub-table-gender')" style="cursor: pointer;">
     <td>gender_concept_id</td><td>INT</td><td>Identifier for the gender concept [Click for details]</td>
@@ -351,12 +358,12 @@
 	<th class="col-10">Data Type</th>
 	<th class="col-60">Description</th>
   </tr>
-  <tr><td>condition_occurrence_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
+  <!--<tr><td>condition_occurrence_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>-->
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
   <tr><td>condition_concept_id</td><td>INT</td><td>Represents the name of the condition <a href="./CompassDataElements.html">(see Compass Data Elements page)</a></td></tr>
-  <tr><td>condition_status_concept_id</td><td>INT</td><td>Represents the status of the condition (need to add subtable)</td></tr>
-  <tr><td>diagnosis_priority</td><td>INT</td><td>Diagnosis priority in source table</td></tr>
+  <tr><td>condition_type</td><td>CHAR</td><td>Modifier of the condition (P: primary; S: secondary)</td></tr>
+  <tr><td>condition_priority</td><td>INT</td><td>Diagnosis priority in source table</td></tr>
   <tr><td>source_code</td><td>INT</td><td>(This column is used for QA)</td></tr>
 </table>
 
@@ -369,11 +376,11 @@
     <th class="col-10">Data Type</th>
     <th class="col-60">Description</th>
   </tr>
-  <tr><td>procedure_occurrence_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
+  <!--<tr><td>procedure_occurrence_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>-->
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
   <tr><td>procedure_concept_id</td><td>INT</td><td>Represents the name of the procedure <a href="./CompassDataElements.html">(see Compass Data Elements page)</a></td></tr>
-  <tr><td>procedure_start_datetime</td><td>DATETIME</td><td>Timestamp of the event</td></tr>
+  <tr><td>procedure_datetime</td><td>DATETIME</td><td>Timestamp of the event</td></tr>
   <tr><td>procedure_type</td><td>CHAR</td><td>Modifier of the procedure (P: primary; S: secondary)</td></tr>
   <tr><td>procedure_priority</td><td>INT</td><td>Procedure position/priority</td></tr>
   <tr><td>provider_id</td><td>INT</td><td>The person who performed the procedure <a href="#p">(see PROVIDER reference table)</a></td></tr>
@@ -407,20 +414,20 @@
     <th class="col-10">Data Type</th>
     <th class="col-60">Description</th>
   </tr>
-  <tr><td>measurement_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
+  <!--<tr><td>measurement_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>-->
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
   <tr><td>measurement_concept_id</td><td>INT</td><td>Represents the name of the measurement <a href="./CompassDataElements.html">(see Compass Data Elements page)</a></td></tr>
   <tr><td>measurement_datetime</td><td>DATETIME</td><td>Timestamp of the event</td></tr>
   <tr><td>value_as_number</td><td>DECIMAL</td><td>Result parsed to be a number</td></tr>
-  <tr><td>value_as_string</td><td>VARCHAR(50)</td><td>Event tag</td></tr>
+  <tr><td>value_source_value</td><td>VARCHAR(50)</td><td>Event tag</td></tr>
   <tr><td>value_as_concept_id</td><td>INT</td><td>Categorical result <a href="./CompassDataElements.html">(see Compass Data Elements page)</td></tr>
   <tr><td>unit_concept_id</td><td>INT</td><td>Units (need to add subtable)</td></tr>
   <tr><td>range_low</td><td>DECIMAL</td><td>Range low parsed to be a number</td></tr>
   <tr><td>range_high</td><td>DECIMAL</td><td>Range high parsed to be a number</td></tr>
   <tr><td>provider_id</td><td>INT</td><td>The person who ordered the measurement <a href="#p">(see PROVIDER reference table)</a></td></tr>
   <tr><td>source_code</td><td>VARCHAR</td><td>(This column is used for QA)</td></tr>
-  <tr><td>result_units_cd</td><td>VARCHAR</td><td>(This column is used for QA)</td></tr>
+  <tr><td>source_code_units</td><td>VARCHAR</td><td>(This column is used for QA)</td></tr>
 </table>
 
 <!-- OBSERVATION Table -->
@@ -432,19 +439,19 @@
     <th class="col-10">Data Type</th>
     <th class="col-60">Description</th>
   </tr>
-  <tr><td>observation_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
+  <!--<tr><td>observation_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>-->
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
   <tr><td>observation_concept_id</td><td>INT</td><td>Represents the name of the observation <a href="./CompassDataElements.html">(see Compass Data Elements page)</a></td></tr>
   <tr><td>observation_datetime</td><td>DATETIME</td><td>Timestamp of the event</td></tr>
   <tr><td>value_as_number</td><td>DECIMAL</td><td>Result parsed to be a number</td></tr>
-  <tr><td>value_as_string</td><td>VARCHAR(60)</td><td>String value of the result</td></tr>
+  <tr><td>value_source_value</td><td>VARCHAR(60)</td><td>String value of the result</td></tr>
   <tr><td>value_as_concept_id</td><td>INT</td><td>Categorical result <a href="./CompassDataElements.html">(see Compass Data Elements page)</td></tr>
-  <tr><td>qualifier_concept_id</td><td>INT</td><td>Attributes of the observation (e.g., severity; need to add subtable)</td></tr>
+  <!--<tr><td>qualifier_concept_id</td><td>INT</td><td>Attributes of the observation (e.g., severity; need to add subtable)</td></tr>-->
   <tr><td>unit_concept_id</td><td>INT</td><td>Units (need to add subtable)</td></tr>
   <tr><td>provider_id</td><td>INT</td><td>The person who charted the observation <a href="#p">(see PROVIDER reference table)</a></td></tr>
   <tr><td>source_code</td><td>VARCHAR</td><td>(This column is used for QA)</td></tr>
-  <tr><td>result_units_cd</td><td>VARCHAR</td><td>(This column is used for QA)</td></tr>
+  <tr><td>source_code_units</td><td>VARCHAR</td><td>(This column is used for QA)</td></tr>
 </table>
 
 <!-- DRUG_EXPOSURE Table -->
@@ -456,12 +463,11 @@
     <th class="col-10">Data Type</th>
     <th class="col-60">Description</th>
   </tr>
-  <tr><td>drug_exposure_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
+  <!--<tr><td>drug_exposure_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>-->
   <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
   <tr><td>person_id</td><td>INT</td><td>Foreign key for person identifier</td></tr>
   <tr><td>drug_concept_id</td><td>INT</td><td>Represents the type of drug <a href="./CompassDataElements.html">(see Compass Data Elements page)</a></td></tr>
-  <tr><td>drug_exposure_start_datetime</td><td>DATETIME</td><td>Timestamp of the start of the event</td></tr>
-  <tr><td>drug_exposure_end_datetime</td><td>DATETIME</td><td>Timestamp of the end of the event</td></tr>
+  <tr><td>drug_exposure_datetime</td><td>DATETIME</td><td>Timestamp of the start of the event</td></tr>
   <tr><td>amount_value</td><td>DECIMAL</td><td>The volume of administration</td></tr>
   <tr><td>amount_unit_concept_id</td><td>INT</td><td>Concept id for the units of the administration (need to add subtable)</td></tr>
   <tr><td>infusion_rate</td><td>DECIMAL</td><td>For IV drugs, include rate</td></tr>
@@ -477,7 +483,7 @@
   <tr><td>flag_discharge_med</td><td>BIT</td><td>1 if record is a prescription medication ordered at discharge, otherwise 0</td></tr>
   <tr><td>flag_existing_home_med</td><td>BIT</td><td>1 if record is an existing home medication, otherwise 0</td></tr>
   <tr><td>source_code</td><td>INT</td><td>(This column is used for QA)</td></tr>
-  <tr><td>EVENT_TAG</td><td>VARCHAR(50)</td><td>(This column is used for QA)</td></tr>
+  <tr><td>source_value</td><td>VARCHAR(50)</td><td>(This column is used for QA)</td></tr>
 </table>
 
 <!-- PROVIDER Table -->
@@ -505,6 +511,24 @@
 	  </table>
     </td>
   </tr>
+</table>
+
+<!-- LOCATION Table -->
+<br>
+<strong id="l">LOCATION</strong><a href="#top">  [Top]</a>
+<table>
+  <tr>
+    <th class="col-30">Column Name</th>
+    <th class="col-10">Data Type</th>
+    <th class="col-60">Description</th>
+  </tr>
+  <tr><td>location_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
+  <tr><td>address_1</td><td>VARCHAR(50)</td><td>Hospital name</td></tr>
+  <tr><td>address_2</td><td>VARCHAR(50)</td><td>Hospital street address</td></tr>
+  <tr><td>city</td><td>VARCHAR(50)</td><td>City</td></tr>
+  <tr><td>state</td><td>VARCHAR(2)</td><td>State</td></tr>
+  <tr><td>zip</td><td>TINYINT</td><td>Zip Code</td></tr>
+  <tr><td>location_source_value</td><td>VARCHAR(10)</td><td>Three-character hospital code [hospital, hos]</td></tr>
 </table>
 
 <!-- CARE_SITE Table -->
@@ -573,23 +597,6 @@
   <tr><td>place_of_service_source_value</td><td>VARCHAR(10)</td><td>Three-character hospital code</td></tr>
 </table>
 
-<!-- LOCATION Table -->
-<br>
-<strong id="l">LOCATION</strong><a href="#top">  [Top]</a>
-<table>
-  <tr>
-    <th class="col-30">Column Name</th>
-    <th class="col-10">Data Type</th>
-    <th class="col-60">Description</th>
-  </tr>
-  <tr><td>location_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
-  <tr><td>address_1</td><td>VARCHAR(50)</td><td>Hospital name</td></tr>
-  <tr><td>address_2</td><td>VARCHAR(50)</td><td>Hospital street address</td></tr>
-  <tr><td>city</td><td>VARCHAR(50)</td><td>City</td></tr>
-  <tr><td>state</td><td>VARCHAR(2)</td><td>State</td></tr>
-  <tr><td>zip</td><td>TINYINT</td><td>Zip Code</td></tr>
-  <tr><td>location_source_value</td><td>VARCHAR(10)</td><td>Three-character hospital code [hospital, hos]</td></tr>
-</table>
 
 <!-- FLAG_DEFINITION Table -->
 <br>
@@ -600,12 +607,61 @@
     <th class="col-10">Data Type</th>
     <th class="col-60">Description</th>
   </tr>
-  <tr><td>flag_id</td><td>INT</td><td>Unique identifier of the flag</td></tr>
+  <tr><td>flag_definition_id</td><td>INT</td><td>Unique identifier of the flag</td></tr>
   <tr><td>flag_definition_name</td><td>VARCHAR(255)</td><td>The name of the flag</td></tr>
   <tr><td>flag_definition_description</td><td>VARCHAR(MAX)</td><td>A description of the flag</td></tr>
   <tr><td>flag_definition_syntax</td><td>VARCHAR(MAX)</td><td>The code used to generate the flag</td></tr>
-  <tr><td>flag_last_modified_by</td><td>VARCHAR(63)</td><td>The person who last editied the flag</td></tr>
-  <tr><td>flag_last_update</td><td>DATE</td><td>The date that the flag was last editied</td></tr>
+  <tr><td>flag_definition_owner</td><td>VARCHAR(63)</td><td>The person at CCM who is responsible for this flag</td></tr>
+  <tr><td>flag_definition_last_update</td><td>DATE</td><td>The date that the flag definition was last editied</td></tr>
+</table>
+
+<!--COHORT_DEFINITION Table -->
+<br>
+<strong id="cd">COHORT_DEFINITION</strong><a href="#top">  [Top]</a>
+<table>
+  <tr>
+    <th class="col-30">Column Name</th>
+    <th class="col-10">Data Type</th>
+    <th class="col-60">Description</th>
+  </tr>
+  <tr><td>cohort_definition_id</td><td>INT</td><td>Unique identifier of the cohort</td></tr>
+  <tr><td>cohort_definition_name</td><td>VARCHAR(255)</td><td>The name of the cohort</td></tr>
+  <tr><td>cohort_definition_description</td><td>VARCHAR(MAX)</td><td>A description of the cohort</td></tr>
+  <tr><td>cohort_definition_syntax</td><td>VARCHAR(MAX)</td><td>The code used to generate the cohort and populate it in the COHORT table</td></tr>
+  <tr><td>subject_concept_id</td><td>INT</td><td>Concept id for the subjects of the cohort (e.g., Person, Visit)</td></tr>
+  <tr><td>cohort_definition_owner</td><td>VARCHAR(63)</td><td>The person at CCM who is responsibile for this cohort definition</td></tr>
+  <tr><td>cohort_definition_last_update</td><td>DATE</td><td>The date that the chort definition was last editied</td></tr>
+</table>
+
+
+<!-- VALUE_SET_DEFINITION Table -->
+<br>
+<strong id="vsd">VALUE_SET_DEFINITION</strong><a href="#top">  [Top]</a>
+<table>
+  <tr>
+    <th class="col-30">Column Name</th>
+    <th class="col-10">Data Type</th>
+    <th class="col-60">Description</th>
+  </tr>
+  <tr><td>value_set_definition_id</td><td>INT</td><td>Unique identifier of the value_set</td></tr>
+  <tr><td>domain_id</td><td>VARCHAR(63)</td><td>The domain of the value_set</td></tr>
+  <tr><td>value_set_definition_name</td><td>VARCHAR(255)</td><td>A name for the value_set</td></tr>
+  <tr><td>value_set_definition_description</td><td>VARCHAR(MAX)</td><td>A description of the value_set</td></tr>
+  <tr><td>value_set_definition_owner</td><td>VARCHAR(63)</td><td>The person at CCM who is responsible for this value_set definition</td></tr>
+  <tr><td>value_set_definition_last_update</td><td>DATE</td><td>The date that the value_set_definition was last editied</td></tr>
+</table>
+
+<!-- VALUE_SET Table -->
+<br>
+<strong id="vs">VALUE_SET</strong><a href="#top">  [Top]</a>
+<table>
+  <tr>
+    <th class="col-30">Column Name</th>
+    <th class="col-10">Data Type</th>
+    <th class="col-60">Description</th>
+  </tr>
+  <tr><td>concept_id</td><td>INT</td><td>Member of the value_set</td></tr>
+  <tr><td>value_set_definition_id</td><td>INT</td><td><a href="#vsd">(see VALUE_SET_DEFINITION reference table)</td></tr>
 </table>
 
 <!-- DAILY_IMV_DETAIL Table -->
@@ -617,7 +673,7 @@
 	  <th class="col-10">Data Type</th>
 	  <th class="col-60">Description</th>
 	</tr>
-	<tr><td>imv_daily_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>
+	<!--<tr><td>imv_daily_id</td><td>INT</td><td>Unique identifier for records in this table</td></tr>-->
 	<tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
 	<tr><td>imv_daily_date</td><td>DATE</td><td>The date of this row in the table.</td></tr>
 	<tr><td>flag_airway_intubated</td><td>BIT</td><td>1 if this tube type was documented during the calendar day, else 0.</td></tr>
@@ -641,38 +697,9 @@
 
 </table>
 
-<!-- FLAG_DAILY_COMPASS Table -->
+<!-- COMORBIDITIES Table -->
 <br>
-<strong id="fdc">FLAG_DAILY_COMPASS</strong><a href="#top">  [Top]</a>
-<table>
-  <tr>
-    <th class="col-30">Column Name</th>
-    <th class="col-10">Data Type</th>
-    <th class="col-60">Description</th>
-  </tr>
-  <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
-  <tr><td>flag_date</td><td>DATE</td><td>The date, during the hospitalization, that this flag is associated with</td></tr>
-  <tr><td>flag_id</td><td>INT</td><td><a href="#f">(see Flag reference table)</td></tr>
-  <tr><td>flag_present</td><td>BIT</td><td>1 if present</td></tr>
-</table>
-
-<!-- FLAG_HOSPITALIZATION_COMPASS Table -->
-<br>
-<strong id="fhc">FLAG_HOSPITALIZATION_COMPASS</strong><a href="#top">  [Top]</a>
-<table>
-  <tr>
-    <th class="col-30">Column Name</th>
-    <th class="col-10">Data Type</th>
-    <th class="col-60">Description</th>
-  </tr>
-  <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
-  <tr><td>flag_id</td><td>INT</td><td><a href="#f">(see Flag reference table)</td></tr>
-  <tr><td>flag_present</td><td>BIT</td><td>1 if present</td></tr>
-</table>
-
-<!-- COMORBIDITIES_COMPASS Table -->
-<br>
-<strong id="cc">COMORBIDITIES_COMPASS</strong><a href="#top">  [Top]</a>
+<strong id="cc">COMORBIDITIES</strong><a href="#top">  [Top]</a>
 <table>
 	<tr>
 	  <th class="col-30">Column Name</th>
@@ -715,6 +742,51 @@
 	<tr><td>Depre</td><td>BIT</td><td>Depression</td></tr>
 
 </table>
+
+<!-- FLAG_DAILY Table -->
+<br>
+<strong id="fdc">FLAG_DAILY</strong><a href="#top">  [Top]</a>
+<table>
+  <tr>
+    <th class="col-30">Column Name</th>
+    <th class="col-10">Data Type</th>
+    <th class="col-60">Description</th>
+  </tr>
+  <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
+  <tr><td>flag_date</td><td>DATE</td><td>The date, during the hospitalization, that this flag is associated with</td></tr>
+  <tr><td>flag_definition_id</td><td>INT</td><td><a href="#fd">(see FLAG_DEFINITION reference table)</td></tr>
+  <tr><td>flag_present</td><td>BIT</td><td>1 if present</td></tr>
+</table>
+
+<!-- FLAG_HOSPITALIZATION Table -->
+<br>
+<strong id="fhc">FLAG_HOSPITALIZATION</strong><a href="#top">  [Top]</a>
+<table>
+  <tr>
+    <th class="col-30">Column Name</th>
+    <th class="col-10">Data Type</th>
+    <th class="col-60">Description</th>
+  </tr>
+  <tr><td>visit_occurrence_id</td><td>BIGINT</td><td>Foreign key for hospitalization identifier</td></tr>
+  <tr><td>flag_definition_id</td><td>INT</td><td><a href="#fd">(see FLAG_DEFINITION reference table)</td></tr>
+  <tr><td>flag_present</td><td>BIT</td><td>1 if present</td></tr>
+</table>
+
+<!-- COHORT Table -->
+<br>
+<strong id="cohort">COHORT</strong><a href="#top">  [Top]</a>
+<table>
+  <tr>
+    <th class="col-30">Column Name</th>
+    <th class="col-10">Data Type</th>
+    <th class="col-60">Description</th>
+  </tr>
+  <tr><td>subject_id</td><td>BIGINT</td><td>Member of the cohort</td></tr>
+  <tr><td>cohort_definition_id</td><td>INT</td><td><a href="#cd">(see COHORT_DEFINITION reference table)</td></tr>
+  <tr><td>cohort_start_datetime</td><td>DATETIME</td><td>When the subject first meets the cohort definition</td></tr>
+  <tr><td>cohort_end_datetime</td><td>DATETIME</td><td>When the subject no longer meets the cohort definition</td></tr>
+</table>
+
 
 </body>
 </html>

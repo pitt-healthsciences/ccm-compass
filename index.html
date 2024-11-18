@@ -38,36 +38,34 @@
 		width: 100vw;
 	}
   </style>
-  <script>
-  function toggleSubTable(id) {
-    const subTable = document.getElementById(id);
-    
-    // Ensure the initial display property is set to 'none' if undefined
-    if (!subTable.style.display) {
-      subTable.style.display = 'none';
-    }
-    
-    // Toggle display between 'none' and 'table-row'
-    subTable.style.display = (subTable.style.display === 'none') ? 'table-row' : 'none';
-  }
-  </script>
 </head>
 <body>
 
 <img src="./img/CCM-banner.png" alt="Floating Banner" class="banner-image" width="1000px">
-<a href="./index.html">[Home]</a> <a href="./CompassDataTables.html">[Tables]</a> <a href="./CompassDataElements.html">[Elements]</a>
+<a href="./index.html">[Home]</a> <a href="./CompassDataTables.html">[Tables]</a> <a href="./CompassDataElements.html">[Elements]</a> <a href="./CompassSyntheticSampleData.html">[Sample]</a>
 <h2 id="top">Compass Data Dictionary</h2> 
 
 <!-- Table of Contents -->
 <div class="toc">
-<h3>Welcome! Use the links below to view the table structure and data elements avaliable in the CCM Compass Data Set.</h3>
+<h3>Welcome! Use the links below to view the table structure, data elements, and synthetic sample data for the CCM Compass Data Set.</h3>
   <ul>
     <li><a href="./CompassDataTables.html">Data Tables</a></li>
 	<li><a href="./CompassDataElements.html">Data Elements</a></li>
+	<li><a href="./CompassSyntheticSampleData.html">Sample Data</a></li>
   </ul>
 </div>
-<i>Last updated 10/31/2024</i> 
+<i>Last updated 11/17/2024</i> 
 <hr>
+
+<h2 id="top">Data Quality</h2> 
+The mapping of source data into the Compass Data Tables and the rollup of concepts into value_sets is intended to be an ongoing performance improvement process. The infrastruture build by the CCM data team supports iterative improvement, with many changes being implementable by updating or instering a single row of information in the back of house system. So if you find issues with the data, work with us to fix it for everyone. More information will be provided here in the future. 
+
+
+<h2 id="top">Data Avaliability</h2> 
+From January 1st 2018 through present, with up to a three month lag time. 
+
+<h2 id="top">Process for Data Requests</h2> 
+To be updated. 
 
 </body>
 </html>
